@@ -13,7 +13,7 @@ profile:
     <p>Tianjin University</p>
 
 news: false  # includes a list of news items
-selected_papers: true # includes a list of papers marked as "selected={true}"
+selected_papers: false # disable selected publications on homepage
 social: false  # includes social icons at the bottom of the page
 ---
 
@@ -27,3 +27,5 @@ Welcome to my academic portfolio. I am currently an undergraduate at **Tianjin U
 
 <br>
 _Detailed project videos, code repositories, and technical reports are being updated. Please check back shortly._
+
+{% include projects_horizontal.liquid %}
