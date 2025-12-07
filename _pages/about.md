@@ -17,6 +17,7 @@ selected_papers: false # disable selected publications on homepage
 social: false  # includes social icons at the bottom of the page
 ---
 
+<div class="single-column">
 Welcome to my academic portfolio. I am currently an undergraduate at **Tianjin University**, focusing on **Hybrid Control**, **Aerial Manipulation**, and **Robot Learning**.
 
 ### Featured Projects
@@ -28,4 +29,12 @@ Welcome to my academic portfolio. I am currently an undergraduate at **Tianjin U
 <br>
 _Detailed project videos, code repositories, and technical reports are being updated. Please check back shortly._
 
-{% include projects_horizontal.liquid %}
+<div class="projects mt-4">
+  <div class="row">
+    {% assign sorted_projects = site.projects | sort: 'importance' %}
+    {% for project in sorted_projects %}
+      {% include projects_horizontal.liquid %}
+    {% endfor %}
+  </div>
+</div>
+</div>

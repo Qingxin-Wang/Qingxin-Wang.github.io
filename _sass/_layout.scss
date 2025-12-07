@@ -51,3 +51,14 @@ body.sticky-bottom-footer {
 *****************************************************************************/
 
 // TODO: redefine projects layout.
+
+.single-column {
+  margin: 0 auto;
+  max-width: 680px;
+}
+.single-column h3,
+.single-column p,
+.single-column ul,
+.single-column ol {
+  text-align: left;
+}
