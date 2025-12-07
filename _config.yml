@@ -47,7 +47,7 @@ repo_trophies:
 # -----------------------------------------------------------------------------
 
 navbar_fixed: true
-hide_navbar: false
+hide_navbar: true
 footer_fixed: true
 search_enabled: true
 socials_in_search: true
@@ -58,7 +58,7 @@ bib_search: true
 max_width: 1100px
 
 # Navbar
-enable_navbar_social: true
+enable_navbar_social: false
 
 # TODO: add layout settings (single page vs. multi-page)
 
