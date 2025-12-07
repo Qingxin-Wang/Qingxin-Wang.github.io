@@ -55,7 +55,7 @@ posts_in_search: true
 bib_search: true
 
 # Dimensions
-max_width: 1100px
+max_width: 110px
 
 # Navbar
 enable_navbar_social: false
