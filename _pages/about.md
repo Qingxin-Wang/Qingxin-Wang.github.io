@@ -17,24 +17,27 @@ selected_papers: false # disable selected publications on homepage
 social: false  # includes social icons at the bottom of the page
 ---
 
-<div class="single-column">
-Welcome to my academic portfolio. I am currently an undergraduate at **Tianjin University**, focusing on **Hybrid Control**, **Aerial Manipulation**, and **Robot Learning**.
+Welcome to my academic portfolio. I am an undergraduate at **Tianjin University**, working on **Hybrid Control**, **Aerial Manipulation**, and **Robot Learning**. I enjoy building real-world systems where control, perception, and embedded hardware meet.
 
-### Featured Projects
+### Research interests
 
-* **Whole-Body MPC for Aerial Manipulation:** Developed a unified control framework addressing coupled dynamics.
-* **Portable Data Acquisition System (Galaxea AI):** Designed a robot-free, high-throughput data collection device.
-* **RoboMaster Engineering:** Led the embedded system design for high-performance combat robots.
+- Robust and adaptive control for agile aerial manipulation
+- Whole-body model predictive control and contact-rich planning
+- Embedded sensing pipelines that close the loop at high bandwidth
 
-<br>
-_Detailed project videos, code repositories, and technical reports are being updated. Please check back shortly._
+### Recent highlights
 
-<div class="projects mt-4">
-  <div class="row">
-    {% assign sorted_projects = site.projects | sort: 'importance' %}
-    {% for project in sorted_projects %}
-      {% include projects_horizontal.liquid %}
-    {% endfor %}
-  </div>
-</div>
-</div>
+- **Whole-body MPC for aerial manipulation** — unified control of coupled quadrotor-arm dynamics with hardware validation.
+- **Portable data acquisition (Galaxea AI)** — robot-free, high-throughput dataset collection for manipulation and perception.
+- **RoboMaster embedded stack** — led design of high-performance control and sensing boards for competition robots.
+
+### Featured projects
+
+<ol class="project-list project-list--compact">
+  {% assign featured_projects = site.projects | sort: 'importance' | slice: 0, 3 %}
+  {% for project in featured_projects %}
+    {% include project_entry.liquid project=project %}
+  {% endfor %}
+</ol>
+
+For more details, see the full list on the <a href="{{ '/projects/' | relative_url }}">projects page</a>.
