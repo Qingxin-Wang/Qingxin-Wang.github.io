@@ -50,25 +50,6 @@ body.sticky-bottom-footer {
 * Projects
 *****************************************************************************/
 
-.post {
-  line-height: 1.65;
-  max-width: 920px;
-  margin: 0 auto;
-
-  .post-header {
-    margin-bottom: 1.5rem;
-
-    .post-title {
-      margin-bottom: 0.25rem;
-    }
-
-    .desc {
-      color: var(--global-text-color-light);
-      font-size: 1.05rem;
-    }
-  }
-}
-
 .project-list {
   list-style: none;
   padding: 0;

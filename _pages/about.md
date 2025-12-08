@@ -6,7 +6,7 @@ subtitle: Robotics Researcher | Embedded Systems Engineer
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: QingxinWang.jpg
   image_circular: false # crops the image to a circle
   address: >
     <p>Undergraduate Student</p>
