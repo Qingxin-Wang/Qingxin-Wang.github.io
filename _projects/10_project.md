@@ -2,8 +2,8 @@
 layout: page
 title: Hybrid Manipulation Platform
 description: Unified control stack for aerial manipulation and embedded sensing.
-img: assets/img/robotics-project.jpg
-importance: 1
+img: 
+importance: 4
 category: research
 links:
   demo: https://example.com/demo

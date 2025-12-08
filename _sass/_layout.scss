@@ -65,6 +65,21 @@ body.sticky-bottom-footer {
   border-radius: 0.75rem;
   background: var(--global-card-bg-color);
 
+  .project-entry__row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+  .project-entry__body {
+    padding-left: 0;
+  }
+
+  @media (min-width: 768px) {
+    .project-entry__body {
+      padding-left: 1.5rem;
+    }
+  }
+
   .project-title {
     font-weight: 600;
     font-size: 1.1rem;

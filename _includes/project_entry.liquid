@@ -1,20 +1,20 @@
 {% assign project_href = project.redirect | default: project.url | relative_url %}
 <li class="project-entry">
-  <div class="row no-gutters align-items-center">
+  <div class="project-entry__row row align-items-center">
     {% if project.img %}
-      <div class="col-4 col-sm-3 pr-sm-0 mb-3 mb-sm-0">
+      <div class="project-entry__media col-12 col-md-4 mb-3 mb-md-0">
         <a href="{{ project_href }}">
           {% include figure.liquid
             loading="eager"
             path=project.img
-            sizes="200px"
+            sizes="320px"
             alt=project.title
             class="project-thumb z-depth-1 rounded"
           %}
         </a>
       </div>
     {% endif %}
-    <div class="{% if project.img %}col-sm-9 col-12{% else %}col-12{% endif %}">
+    <div class="project-entry__body {% if project.img %}col-12 col-md-8{% else %}col-12{% endif %}">
       <div class="project-title">
         <a href="{{ project_href }}">{{ project.title }}</a>
       </div>
