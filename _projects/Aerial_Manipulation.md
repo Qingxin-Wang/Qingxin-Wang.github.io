@@ -1,7 +1,7 @@
 ---
 layout: page
-title:   project 1
-description: with background image
+title:   Aerial_Manipulation
+description: Full Body Dynamic MPC for Unmanned Aerial Manipulation
 img: assets/img/12.jpg
 importance: 1
 category: work

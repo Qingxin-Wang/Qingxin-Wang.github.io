@@ -2,8 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Robotics Researcher | Embedded Systems Engineer
-
+subtitle: Robotics Researcher 
 profile:
   align: right
   image: QingxinWang.jpg

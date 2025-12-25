@@ -131,6 +131,33 @@ body.sticky-bottom-footer {
   }
 }
 
+// Emphasized headings inside project pages
+.post h1 {
+  font-weight: 700;
+  font-size: 2rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.post h2 {
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-top: 1.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.post h3 {
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.post h4 {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-top: 1rem;
+}
+
 .single-column {
   margin: 0 auto;
   max-width: 680px;
