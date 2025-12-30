@@ -371,9 +371,9 @@ ninja.data = [{
           description: "Unified control stack for aerial manipulation and embedded sensing.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/10_project/";
-            },},{id: "projects-aerial-manipulation",
-          title: 'Aerial_Manipulation',
-          description: "Full Body Dynamic MPC for Unmanned Aerial Manipulation",
+            },},{id: "projects-efficient-whole-body-mpc-for-aerial-manipulation",
+          title: 'Efficient Whole-Body MPC for Aerial Manipulation',
+          description: "Unified whole-body control with sim-to-real deployment validation",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Aerial_Manipulation/";
             },},{id: "projects-lio-based-navigation-framework",
@@ -406,20 +406,6 @@ ninja.data = [{
         section: 'Socials',
         handler: () => {
           window.open("/feed.xml", "_blank");
-        },
-      },{
-        id: 'social-inspire',
-        title: 'Inspire HEP',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://inspirehep.net/authors/", "_blank");
-        },
-      },{
-        id: 'social-scholar',
-        title: 'Google Scholar',
-        section: 'Socials',
-        handler: () => {
-          window.open("https://scholar.google.com/citations?user=", "_blank");
         },
       },{
       id: 'light-theme',
