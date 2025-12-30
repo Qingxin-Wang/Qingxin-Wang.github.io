@@ -6,8 +6,6 @@ img: assets/img/sentry.jpg
 importance: 2
 category: work
 giscus_comments: true
-links:
-  github: https://github.com/Qingxin-Wang/Sentry25NAVI/tree/on_robot
 ---
 
 # 🤖 RoboMaster Sentry 2025: Robust Navigation & Localization System Design
@@ -155,5 +153,3 @@ $$
 
 - Point-LIO delivers high-frequency robustness; Small_GICP relocalizes without fragile initial poses.  
 - Hybrid A* plus curvature-adaptive PD control yields smooth obstacle avoidance and stable tracking in complex terrain.
-
-[🔗 View on GitHub]({{ page.links.github }})

@@ -7,18 +7,24 @@ importance: 3
 category: work
 ---
 
-## Overview
+# 🎮 Teleoperation Manipulation Framework
+> **Project Overview:** High-frequency compliant teleoperation stack for RoboMaster assembly tasks, combining impedance control with analytical IK on resource-limited hardware.
 
-This project presents a high-frequency compliant control framework designed for delicate assembly in constrained workspaces. 
+- **Role:** Control and kinematics engineer
+- **Tech Stack:** C++, embedded control, custom IK solver
+- **Hardware:** RoboMaster arm (5 DOF), motor current sensing, custom controller
 
-### Feature
-#### Impedance Control
-Solely kinematic control proved brittle under contact. To ensure high success rates in delicate placement under contact, I implemented a Cartesian Impedance Controller. By utilizing motor currents for proprioceptive torque estimation, I endowed the arm with compliant dynamics. Such a solution allowed the robot to robustly adapt to environmental contacts, achieving a 90% success rate in complex assembly tasks within 10 seconds
-#### High-Frequency IK Solver
-To guarantee the real-time responsiveness required for this compliant behavior on limited hardware, I co-designed the hardware and software by mechanically decoupling the wrist axes to satisfy Pieper’s Criterion, bypassing slow iterative solvers and ensuring a closed-form analytical solution that achieved stable 150Hz control. 
-(kinematics derivation is shown in details)
+## Features
+### Impedance Control
+- Kinematic-only control was brittle under contact; added Cartesian impedance using motor currents for proprioceptive torque estimation.
+- Compliant dynamics enabled robust contact adaptation and a 90% success rate in complex assemblies within 10 seconds.
+
+### High-Frequency IK Solver
+- Mechanically decoupled wrist axes to satisfy Pieper’s Criterion and allow a closed-form IK solution.
+- Achieved stable 150 Hz control on constrained hardware without slow iterative solvers (derivation below).
+
 ### Timeline
-Originally architected during the 2024 RoboMaster Season and was successfully reused in the 2025 Season due to its proven reliability.
+- Built for RoboMaster 2024; reused in 2025 with minimal changes due to proven reliability.
 
 ## Videos
 

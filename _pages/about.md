@@ -38,5 +38,3 @@ Welcome to my academic portfolio. I am an undergraduate at **Tianjin University*
     {% include project_entry.liquid project=project %}
   {% endfor %}
 </ol>
-
-For more details, see the full list on the <a href="{{ '/projects/' | relative_url }}">projects page</a>.
