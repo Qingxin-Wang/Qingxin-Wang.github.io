@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Robotics Researcher 
+subtitle: Robotics | Control | Systems 
 profile:
   align: right
   image: QingxinWang.jpg
@@ -16,19 +16,20 @@ selected_papers: false # disable selected publications on homepage
 social: false  # includes social icons at the bottom of the page
 ---
 
-Welcome to my academic portfolio. I am an undergraduate at **Tianjin University**, working on **Hybrid Control**, **Aerial Manipulation**, and **Robot Learning**. I enjoy building real-world systems where control, perception, and embedded hardware meet.
+I am a senior undergraduate at **Tianjin University** and a research intern at the **MARS Lab** (Tsinghua University), advised by **Prof. Hang Zhao**.
 
-### Research interests
+My research pursues **agile aerial manipulation**. I focus on bridging **optimization-based control** with rigorous system design to achieve robust interaction in complex environments.
 
-- Robust and adaptive control for agile aerial manipulation
-- Whole-body model predictive control and contact-rich planning
-- Embedded sensing pipelines that close the loop at high bandwidth
+Previously, as a core member of the **PeiYang Robotics Team** (RoboMaster), I architected full-stack autonomy systems—from real-time firmware to state estimation. This experience grounded my philosophy: theoretical optimality must be validated on rugged, real-world hardware.
 
-### Recent highlights
+### Research Interests
 
-- **Whole-body MPC for aerial manipulation** — unified control of coupled quadrotor-arm dynamics with hardware validation.
-- **Portable data acquisition (Galaxea AI)** — robot-free, high-throughput dataset collection for manipulation and perception.
-- **RoboMaster embedded stack** — led design of high-performance control and sensing boards for competition robots.
+* **Whole-Body MPC:** Formulating optimization problems to explicitly handle coupled dynamics, contact constraints, and actuation limits.
+* **Agile Aerial Manipulation:** Controlling floating-base systems under aerodynamic disturbances and physical interaction.
+* **State Estimation for Control:** Ensuring low-latency, drift-free localization (e.g., via LIO) to support high-bandwidth feedback in aggressive maneuvers.
+
+### Technical Stack
+- C/C++, Python, ROS/ROS2, PyTorch, PX4, STM32/Embedded
 
 ### Featured projects
 
