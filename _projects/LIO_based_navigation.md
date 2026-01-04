@@ -5,7 +5,7 @@ description: RoboMaster Sentry 2025 navigation stack based on Point-LIO + Hybrid
 img: assets/img/sentry.jpg
 importance: 2
 category: work
-giscus_comments: true
+giscus_comments: false
 ---
 
 # 🤖 RoboMaster Sentry 2025: Robust Navigation & Localization System Design
@@ -25,7 +25,7 @@ giscus_comments: true
 
 ## 2. Simulation & Preprocessing
 
-- Built a custom Gazebo Livox Mid-360 plugin.  
+- Implemented a custom Gazebo Livox Mid-360 plugin.  
 - Fixed intrinsic point cloud distortion and added multiple ROS message formats for driver-free usage.
 
 <div class="row my-4">
@@ -140,16 +140,30 @@ $$
 
 - Compensates gimbal-induced yaw differences between base_link and motion vector, eliminating overshoot.
 
+## 6. Demo Videos
+
 <div class="row my-4">
-  <div class="col-sm d-flex justify-content-center">
-    {% include figure.liquid path="assets/img/rate_compensate.PNG" title="Yaw-rate compensation effect" class="img-fluid rounded z-depth-1" max-width="720px" %}
+  <div class="col-lg-6 col-md-12 mb-3">
+    <div class="embed-responsive embed-responsive-16by9 rounded overflow-hidden">
+      <video class="embed-responsive-item" controls preload="metadata">
+        <source src="/assets/video/Sentry_Demo.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="text-muted small mt-2 mb-0">Sentry demo: indoor navigation with Point-LIO odometry.</p>
+  </div>
+  <div class="col-lg-6 col-md-12 mb-3">
+    <div class="embed-responsive embed-responsive-16by9 rounded overflow-hidden">
+      <video class="embed-responsive-item" controls preload="metadata">
+        <source src="/assets/video/Sentry_in_game.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="text-muted small mt-2 mb-0">Sentry in game: live match run showcasing localization stability.</p>
   </div>
 </div>
-<div class="caption mt-2 mb-4">
-  Angular velocity compensation removes overshoot during high-speed rotation.
-</div>
 
-## 6. Conclusion
+## 7. Conclusion
 
 - Point-LIO delivers high-frequency robustness; Small_GICP relocalizes without fragile initial poses.  
 - Hybrid A* plus curvature-adaptive PD control yields smooth obstacle avoidance and stable tracking in complex terrain.

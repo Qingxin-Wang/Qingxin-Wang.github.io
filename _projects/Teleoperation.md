@@ -11,8 +11,8 @@ category: work
 > **Project Overview:** High-frequency compliant teleoperation stack for RoboMaster assembly tasks, combining impedance control with analytical IK on resource-limited hardware.
 
 - **Role:** Control and kinematics engineer
-- **Tech Stack:** C++, embedded control, custom IK solver
-- **Hardware:** RoboMaster arm (5 DOF), motor current sensing, custom controller
+- **Tech Stack:** C, STM32, embedded control, custom IK solver
+- **Hardware:** RoboMaster arm (7 DOF), DC motor, custom controller
 
 ## Features
 ### Impedance Control

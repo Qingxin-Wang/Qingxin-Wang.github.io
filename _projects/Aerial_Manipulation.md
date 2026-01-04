@@ -12,9 +12,9 @@ related_publications: false
 > **Project Overview:** A unified, end-effector-centric Whole-Body MPC framework for aerial manipulators. By modeling the UAV and arm as a single dynamic entity, this system achieves precise trajectory tracking and force interaction. The project spans from mathematical formulation (MJPC) to a decoupled simulation architecture and sim-to-real deployment on PX4 hardware.
 
 - **Role:** Lead Researcher & System Architect
-- **Tech Stack:** MuJoCo MJPC, Crocoddyl, Pinocchio, PX4 Autopilot, ROS/ROS2, C++, Python
-- **Hardware:** Hexacopter + 4-DOF Arm, PX4 flight controller, Mid-360 LiDAR
-- **Keywords:** Whole-Body Control, Model Predictive Control (MPC), System Identification, Sim-to-Real, Differential Dynamic Programming (DDP)
+- **Tech Stack:** MuJoCo MJPC, Crocoddyl, Pinocchio, PX4 Autopilot, ROS, C++, Python
+- **Hardware:** Quadcopter + 2-DOF Arm, PX4 flight controller, Mid-360 LiDAR
+- **Keywords:** Whole-Body Model Predictive Control (MPC), Impedance Control, System Identification, Sim-to-Real, 
 
 ## 1. Motivation: Breaking the Decoupling Barrier
 Traditional aerial manipulation treats the drone and arm as separate subsystems, often viewing interaction forces merely as external disturbances. This decoupled view simplifies control but severely caps performance and precision.
@@ -25,7 +25,7 @@ Traditional aerial manipulation treats the drone and arm as separate subsystems,
 We adopted **MJPC (MuJoCo MPC)** with an iLQG solver to handle the non-linear dynamics of the underactuated system.
 
 ### A. Unified Dynamics & Cost Formulation
-We modeled the 12-DOF system (UAV + Arm) as a single entity in the MJCF format, exported and refined from SolidWorks. The core innovation lies in the cost function design $J(x, U)$:
+We modeled the 8-DOF system (UAV + Arm) as a single entity in the MJCF format, exported and refined from SolidWorks. The core innovation lies in the cost function design $J(x, U)$:
 
 $$J_0(x,U) = \sum_{i=0}^{N-1} \ell(x_i, u_i) + \ell_f(x_N)$$
 
@@ -96,7 +96,33 @@ The framework underwent rigorous validation in high-fidelity PX4 SITL (Software-
 </div>
 <p class="text-center text-muted mb-4">Yaw tracking: orange is actual yaw, blue is the reference.</p>
 
-## 5. Evolution: From Numerical to Analytical
-While finite-difference derivatives in MJPC validated the concept, they limited the convergence speed. The framework is currently pivoting to **Analytic Differential Dynamic Programming (DDP)** using **Crocoddyl** and **Pinocchio**. By computing analytical derivatives, we target full convergence (10+ iterations) within a 100 Hz control loop, paving the way for highly dynamic aerial interaction tasks.
+## 5. Hardware Deployment: Perception & State Estimation
+
+<div class="row align-items-start mt-3">
+  <div class="col-lg-6 col-md-7">
+    <h4 class="h5 mb-2">A. Hardware Stack</h4>
+    <ul class="mb-3">
+      <li>Airframe: Custom quadrotor with a bottom-mounted 2-DOF servo arm.</li>
+      <li>Compute: Pixhawk 6C handling attitude; onboard NUC/Jetson runs MPC and SLAM.</li>
+      <li>Sensing: Livox Mid-360 LiDAR (omnidirectional) with integrated IMU for tightly coupled feedback.</li>
+    </ul>
+  </div>
+  <div class="col-lg-6 col-md-5">
+    <div class="embed-responsive embed-responsive-16by9 rounded overflow-hidden mb-3">
+      <video class="embed-responsive-item" controls preload="metadata">
+        <source src="/assets/video/LIO_on_UAV.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
+
+### B. High-Bandwidth LIO Integration
+- Challenge: Standard GPS/VIO pipelines drift or update too slowly, destabilizing the MPC during contact-rich tasks.
+- Algorithm: Point-LIO fuses raw Mid-360 point clouds with IMU to emit odometry at **100 Hz**.
+- Closed loop: The estimated state $\hat{x}$ is transformed to the body frame and streamed via MAVROS directly into the MPC solver, enabling drift-free hovering and precise indoor maneuvers.
+
+## 6. Evolution: From Numerical to Analytical
+While finite-difference derivatives in MJPC validated the concept, they limited the convergence speed. The framework is currently pivoting to **Analytic Differential Dynamic Programming (DDP)** using **Crocoddyl** and **Pinocchio**. By computing analytical derivatives, we target full convergence within a 100 Hz control loop, paving the way for highly dynamic aerial interaction tasks.
 
 ---
