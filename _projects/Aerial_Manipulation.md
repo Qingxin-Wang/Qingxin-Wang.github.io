@@ -57,14 +57,14 @@ A major challenge was the dynamic mismatch between MuJoCo's ideal actuators and 
     {% include figure.liquid path="assets/img/arm_alignment.png" title="Arm sim-to-sim alignment (orange: MuJoCo, blue: Gazebo)" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
-<p class="text-center text-muted mb-4">Arm sim-to-sim alignment (orange: MuJoCo, blue: Gazebo).</p>
+<p class="text-center text-muted mb-4">Arm sim-to-sim alignment (orange: MuJoCo, green: Gazebo, blue: command).</p>
 
 <div class="row">
   <div class="col-lg-10 col-md-11 mx-auto mt-3">
     {% include figure.liquid path="assets/img/px4_alignment.png" title="PX4 attitude alignment (orange: MuJoCo response, green: PX4 SITL)" class="img-fluid rounded z-depth-1" %}
   </div>
 </div>
-<p class="text-center text-muted mb-4">PX4 attitude alignment (orange: MuJoCo response, green: PX4 SITL).</p>
+<p class="text-center text-muted mb-4">PX4 attitude alignment (orange: response, blue: command).</p>
 
 ### C. Solving Tracking Latency
 
