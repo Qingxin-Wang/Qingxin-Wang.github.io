@@ -68,35 +68,42 @@ The framework underwent rigorous validation in high-fidelity PX4 SITL (Software-
   - **RMSE (3D Position):** **0.038 m** (X: 0.030m, Y: 0.021m, Z: 0.011m)
   - **Attitude Stability:** Maintained pitch RMSE **0.45** and yaw RMSE **0.64**.
 
-<div class="row">
-  <div class="col-lg-10 col-md-11 mx-auto mt-3">
+<div class="row justify-content-center mt-3">
+  <div class="col-lg-10 col-md-11 mx-auto">
+    <div class="embed-responsive embed-responsive-16by9 rounded overflow-hidden mb-3">
+      <video class="embed-responsive-item" controls preload="metadata">
+        <source src="/assets/video/mjpc.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+    <p class="text-center text-muted mb-4">MJPC whole-body tracking demo.</p>
+  </div>
+</div>
+
+<div class="row justify-content-center mt-4">
+  <div class="col-lg-6 col-md-10 mb-4">
     {% include figure.liquid path="assets/img/EE_tracking.png" title="End-effector trajectory (orange: actual, blue: reference)" class="img-fluid rounded z-depth-1" %}
+    <p class="text-center text-muted mb-0">End-effector trajectory (orange: actual ee path, blue: reference, green: actual body path).</p>
   </div>
-</div>
-<p class="text-center text-muted mb-4">End-effector trajectory (orange: actual path, blue: reference).</p>
-
-<div class="row">
-  <div class="col-lg-10 col-md-11 mx-auto mt-3">
+  <div class="col-lg-6 col-md-10 mb-4">
     {% include figure.liquid path="assets/img/EE_error.png" title="End-effector tracking error (RMSE shown, colors per axis)" class="img-fluid rounded z-depth-1" %}
+    <p class="text-center text-muted mb-0">End-effector error (per-axis colors per legend, RMSE annotated in the title).</p>
   </div>
 </div>
-<p class="text-center text-muted mb-4">End-effector error (per-axis colors per legend, RMSE annotated in the title).</p>
 
-<div class="row">
-  <div class="col-lg-10 col-md-11 mx-auto mt-3">
+<div class="row justify-content-center mt-2">
+  <div class="col-lg-6 col-md-10 mb-4">
     {% include figure.liquid path="assets/img/pitch_tracking.png" title="Pitch tracking overlay" class="img-fluid rounded z-depth-1" %}
+    <p class="text-center text-muted mb-0">Pitch tracking (orange: actual Pitch, blue: reference, green: error).</p>
   </div>
-</div>
-<p class="text-center text-muted mb-4">Pitch tracking: orange is actual pitch, blue is the PX4/SITL reference.</p>
-
-<div class="row">
-  <div class="col-lg-10 col-md-11 mx-auto mt-3">
+  <div class="col-lg-6 col-md-10 mb-4">
     {% include figure.liquid path="assets/img/yaw_tracking.png" title="Yaw tracking overlay" class="img-fluid rounded z-depth-1" %}
+    <p class="text-center text-muted mb-0">Yaw tracking (orange: actual Yaw, blue: reference, green: error).</p>
   </div>
 </div>
-<p class="text-center text-muted mb-4">Yaw tracking: orange is actual yaw, blue is the reference.</p>
 
 ## 5. Hardware Deployment: Perception & State Estimation
+MPC control here runs **without the arm attached**, paired with LiDAR-based state estimation for stable flight.
 
 <div class="row align-items-start mt-3">
   <div class="col-lg-6 col-md-7">
@@ -124,5 +131,25 @@ The framework underwent rigorous validation in high-fidelity PX4 SITL (Software-
 
 ## 6. Evolution: From Numerical to Analytical
 While finite-difference derivatives in MJPC validated the concept, they limited the convergence speed. The framework is currently pivoting to **Analytic Differential Dynamic Programming (DDP)** using **Crocoddyl** and **Pinocchio**. By computing analytical derivatives, we target full convergence within a 100 Hz control loop, paving the way for highly dynamic aerial interaction tasks.
+
+<div class="row align-items-start mt-3">
+  <div class="col-lg-6 col-md-7">
+    <p class="mb-2"><strong>Latest DDP result:</strong> analytic derivatives running at 100 Hz with tight tracking.</p>
+    <ul class="mb-0">
+      <li>RMSE x: <strong>0.0141m</strong></li>
+      <li>RMSE y: <strong>0.0001m</strong></li>
+      <li>RMSE z: <strong>0.0089m</strong></li>
+      <li>RMSE 3D: <strong>0.0167m</strong></li>
+    </ul>
+  </div>
+  <div class="col-lg-6 col-md-5">
+    <div class="embed-responsive embed-responsive-16by9 rounded overflow-hidden mb-3">
+      <video class="embed-responsive-item" controls preload="metadata">
+        <source src="/assets/video/ddp2.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </div>
+</div>
 
 ---
