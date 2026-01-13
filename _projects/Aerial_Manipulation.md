@@ -158,7 +158,7 @@ While finite-difference derivatives in MJPC validated the concept, they limited 
   <div class="col-lg-6 col-md-5">
     <div class="embed-responsive embed-responsive-16by9 rounded overflow-hidden mb-3">
       <video class="embed-responsive-item" controls preload="metadata">
-        <source src="/assets/video/ddp2.mp4" type="video/mp4">
+        <source src="/assets/video/ddp.mp4" type="video/mp4">
         Your browser does not support the video tag.
       </video>
     </div>
