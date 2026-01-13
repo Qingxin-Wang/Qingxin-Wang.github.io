@@ -4,7 +4,8 @@
     {% if project.img %}
       <div class="project-entry__media col-12 col-md-4 mb-3 mb-md-0">
         <a href="{{ project_href }}">
-          {% include figure.liquid
+          {%
+            include figure.liquid
             loading="eager"
             path=project.img
             sizes="320px"

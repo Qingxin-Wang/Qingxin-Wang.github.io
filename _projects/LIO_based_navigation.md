@@ -12,20 +12,20 @@ giscus_comments: false
 
 > **Project Overview**: Designed a comprehensive navigation solution based on **Point-LIO** and **Hybrid A\*** to address localization drift in high-speed, dynamic environments. Achieved centimeter-level accuracy and resolved robustness issues present in traditional schemes for the Sentry robot.
 
-- **Role:** Algorithm Design & Implementation  
-- **Tech Stack:** ROS, C++, LiDAR SLAM, Control Theory  
-- **Hardware:** Livox Mid-360, Omnidirectional Chassis  
+- **Role:** Algorithm Design & Implementation
+- **Tech Stack:** ROS, C++, LiDAR SLAM, Control Theory
+- **Hardware:** Livox Mid-360, Omnidirectional Chassis
 
 ## 1. Background & The Challenge
 
-- **2023 (2D LiDAR + Cartographer):** Insufficient accuracy and stability during aggressive motion.  
-- **2024 Early (FAST-LIO2 + AMCL):** Significant drift in regional matches; AMCL over-dependent on initial pose.  
-- **Navigation pain points:** Weak long-term map maintenance and false slope obstacles in CMU exploration.  
+- **2023 (2D LiDAR + Cartographer):** Insufficient accuracy and stability during aggressive motion.
+- **2024 Early (FAST-LIO2 + AMCL):** Significant drift in regional matches; AMCL over-dependent on initial pose.
+- **Navigation pain points:** Weak long-term map maintenance and false slope obstacles in CMU exploration.
 - **Goal:** Improve odometry during aggressive maneuvers and optimize global planning/trajectory tracking.
 
 ## 2. Simulation & Preprocessing
 
-- Implemented a custom Gazebo Livox Mid-360 plugin.  
+- Implemented a custom Gazebo Livox Mid-360 plugin.
 - Fixed intrinsic point cloud distortion and added multiple ROS message formats for driver-free usage.
 
 <div class="row my-4">
@@ -44,25 +44,25 @@ giscus_comments: false
 
 ### 3.1 Coordinate System Definition
 
-- Split transform publication for stability:  
-  - $T^{odom}_{Map}$: set once at relocalization startup and held static.  
+- Split transform publication for stability:
+  - $T^{odom}_{Map}$: set once at relocalization startup and held static.
   - $T^{body}_{odom}$: updated in real time by high-frequency odometry.
 
 ### 3.2 Odometry: Point-LIO (vs. FAST-LIO2)
 
-1) **Point-wise LIO:** Per-point processing removes intra-frame distortion; tracks extreme dynamics.  
-2) **Stochastic IMU model:** Treats IMU outputs as system outputs; augments kinematics to smooth saturated sensors.  
-3) **Tightly coupled & lightweight:** Real-time on low-power ARM.
+1. **Point-wise LIO:** Per-point processing removes intra-frame distortion; tracks extreme dynamics.
+2. **Stochastic IMU model:** Treats IMU outputs as system outputs; augments kinematics to smooth saturated sensors.
+3. **Tightly coupled & lightweight:** Real-time on low-power ARM.
 
 ### 3.3 Relocalization: SAC_IA + Small_GICP
 
-- Pipeline: FPFH feature extraction (ground filtered) → **SAC-IA** coarse alignment → **Small_GICP** fine registration.  
+- Pipeline: FPFH feature extraction (ground filtered) → **SAC-IA** coarse alignment → **Small_GICP** fine registration.
 
-| Feature | AMCL (Legacy) | Small_GICP (New) |
-| :--- | :--- | :--- |
-| Initial Pose Dependency | High | **Low** (X: 4–5m, Yaw: 30–45°) |
+| Feature                  | AMCL (Legacy)           | Small_GICP (New)                      |
+| :----------------------- | :---------------------- | :------------------------------------ |
+| Initial Pose Dependency  | High                    | **Low** (X: 4–5m, Yaw: 30–45°)        |
 | Computational Efficiency | Degrades with particles | **Very fast** (faster than Fast_GICP) |
-| Robustness | Sensitive to dynamics | High, via feature-based matching |
+| Robustness               | Sensitive to dynamics   | High, via feature-based matching      |
 
 <div class="row my-4">
   <div class="col-sm d-flex justify-content-center">
@@ -77,10 +77,10 @@ giscus_comments: false
 
 ### 4.1 Global Planning: Hybrid A\*
 
-- Continuous state search $(x, y, \theta)$; kinematic-feasible paths.  
-- Dual heuristics:  
-  - $h_1$: Holonomic (obstacle-free) via Dubins/Reeds-Shepp.  
-  - $h_2$: Non-holonomic (with obstacles) via Dijkstra.  
+- Continuous state search $(x, y, \theta)$; kinematic-feasible paths.
+- Dual heuristics:
+  - $h_1$: Holonomic (obstacle-free) via Dubins/Reeds-Shepp.
+  - $h_2$: Non-holonomic (with obstacles) via Dijkstra.
   - Cost: $\max\{h_1, h_2\}$.
 
 <div class="row my-4">
@@ -97,19 +97,19 @@ giscus_comments: false
 
 ### 4.2 Dynamic Obstacle Segmentation
 
-1) De-skew with odometry and align using prior $T^{Map}_{body}$.  
-2) Transform scan to Map; far points from prior map → dynamic obstacles.  
-3) Health monitor: excessive dynamics trigger relocalization.
+1. De-skew with odometry and align using prior $T^{Map}_{body}$.
+2. Transform scan to Map; far points from prior map → dynamic obstacles.
+3. Health monitor: excessive dynamics trigger relocalization.
 
 ## 5. Motion Control
 
 ### 5.1 Local Smoothing & Curvature Estimation
 
-- Take the 20 poses before the goal and spline-interpolate:  
+- Take the 20 poses before the goal and spline-interpolate:
   $$
   S(x) = a_i(x-x_i)^3 + b_i(x-x_i)^2 + c_i(x-x_i) + d_i
   $$
-- Curvature (Three-Point Method):  
+- Curvature (Three-Point Method):
   $$
   \kappa = \frac{2\| (P_1 - P_0) \times (P_2 - P_0) \|}{\| P_1 - P_0 \| \,\| P_2 - P_1 \| \,\| P_2 - P_0 \|}
   $$
@@ -165,5 +165,5 @@ $$
 
 ## 7. Conclusion
 
-- Point-LIO delivers high-frequency robustness; Small_GICP relocalizes without fragile initial poses.  
-- Hybrid A* plus curvature-adaptive PD control yields smooth obstacle avoidance and stable tracking in complex terrain.
+- Point-LIO delivers high-frequency robustness; Small_GICP relocalizes without fragile initial poses.
+- Hybrid A\* plus curvature-adaptive PD control yields smooth obstacle avoidance and stable tracking in complex terrain.

@@ -9,22 +9,26 @@ related_publications: false
 ---
 
 # 🚁 Efficient Whole-Body MPC for Aerial Manipulation
+
 > **Project Overview:** A unified, end-effector-centric Whole-Body MPC framework for aerial manipulators. By modeling the UAV and arm as a single dynamic entity, this system achieves precise trajectory tracking and force interaction. The project spans from mathematical formulation (MJPC) to a decoupled simulation architecture and sim-to-real deployment on PX4 hardware.
 
 - **Role:** Lead Researcher & System Architect
 - **Tech Stack:** MuJoCo MJPC, Crocoddyl, Pinocchio, PX4 Autopilot, ROS, C++, Python
 - **Hardware:** Quadcopter + 2-DOF Arm, PX4 flight controller, Mid-360 LiDAR
-- **Keywords:** Whole-Body Model Predictive Control (MPC), Impedance Control, System Identification, Sim-to-Real, 
+- **Keywords:** Whole-Body Model Predictive Control (MPC), Impedance Control, System Identification, Sim-to-Real,
 
 ## 1. Motivation: Breaking the Decoupling Barrier
+
 Traditional aerial manipulation treats the drone and arm as separate subsystems, often viewing interaction forces merely as external disturbances. This decoupled view simplifies control but severely caps performance and precision.
 
-**My approach:** Build a unified, whole-body control framework that explicitly models the coupling between the floating base and the manipulator. This allows the optimizer to *exploit* coupling dynamics rather than rejecting them, enabling precise interaction without heavy, fully actuated hardware.
+**My approach:** Build a unified, whole-body control framework that explicitly models the coupling between the floating base and the manipulator. This allows the optimizer to _exploit_ coupling dynamics rather than rejecting them, enabling precise interaction without heavy, fully actuated hardware.
 
 ## 2. Methodology: End-Effector Centric Optimization
+
 We adopted **MJPC (MuJoCo MPC)** with an iLQG solver to handle the non-linear dynamics of the underactuated system.
 
 ### A. Unified Dynamics & Cost Formulation
+
 We modeled the 8-DOF system (UAV + Arm) as a single entity in the MJCF format, exported and refined from SolidWorks. The core innovation lies in the cost function design $J(x, U)$:
 
 $$J_0(x,U) = \sum_{i=0}^{N-1} \ell(x_i, u_i) + \ell_f(x_N)$$
@@ -33,14 +37,18 @@ $$J_0(x,U) = \sum_{i=0}^{N-1} \ell(x_i, u_i) + \ell_f(x_N)$$
 - **Safety via Smoothed Penalties:** Since vanilla MJPC lacks hard constraint handling, I implemented **smoothed penalty functions** (using cubic splines, $\mathcal{L}_\epsilon[x]$) to strictly enforce actuator limits and safety boundaries (e.g., $p_B^{max}$) while preserving a differentiable gradient landscape for the solver.
 
 ## 3. System Architecture & Engineering Challenges
+
 To ensure robustness and scalability, I engineered a **decoupled simulation framework** that separates the control algorithm from the environment.
 
 ### A. Decoupled Architecture
+
 - **StateManager & Controller:** Designed a stateless `mjpc_ctrl_headless` module that communicates via a thread-safe `StateManager`.
 - **Flexibility:** This architecture allows seamless switching between **MuJoCo** (fast physics), **Gazebo + PX4 SITL** (realistic flight stack), and **Physical Hardware** without changing the core control code.
 
 ### B. Bridging the Reality Gap (Dynamics Alignment)
+
 A major challenge was the dynamic mismatch between MuJoCo's ideal actuators and the real-world PX4 flight controller.
+
 - **Actuator Mapping:** I derived a linear mapping to align MuJoCo's PID parameters with PX4's normalized rate loop. This ensured that a specific control signal produced identical physical responses in both simulators.
 - **Validation:** The pitch and roll rate responses in Gazebo (green) and MuJoCo (orange) achieved a near-perfect match after alignment.
 
@@ -59,9 +67,11 @@ A major challenge was the dynamic mismatch between MuJoCo's ideal actuators and 
 <p class="text-center text-muted mb-4">PX4 attitude alignment (orange: MuJoCo response, green: PX4 SITL).</p>
 
 ### C. Solving Tracking Latency
+
 Standard MJPC uses a static target per iteration, causing tracking lag. I implemented a time-based trajectory interpolation module that feeds the solver with future reference states, significantly reducing dynamic tracking error.
 
 ## 4. Quantitative Results
+
 The framework underwent rigorous validation in high-fidelity PX4 SITL (Software-in-the-Loop) environments tracking complex figure-8 trajectories.
 
 - **Tracking Precision:** Achieved sub-5cm accuracy in complex 3D maneuvers.
@@ -103,6 +113,7 @@ The framework underwent rigorous validation in high-fidelity PX4 SITL (Software-
 </div>
 
 ## 5. Hardware Deployment: Perception & State Estimation
+
 MPC control here runs **without the arm attached**, paired with LiDAR-based state estimation for stable flight.
 
 <div class="row align-items-start mt-3">
@@ -125,11 +136,13 @@ MPC control here runs **without the arm attached**, paired with LiDAR-based stat
 </div>
 
 ### B. High-Bandwidth LIO Integration
+
 - Challenge: Standard GPS/VIO pipelines drift or update too slowly, destabilizing the MPC during contact-rich tasks.
 - Algorithm: Point-LIO fuses raw Mid-360 point clouds with IMU to emit odometry at **100 Hz**.
 - Closed loop: The estimated state $\hat{x}$ is transformed to the body frame and streamed via MAVROS directly into the MPC solver, enabling drift-free hovering and precise indoor maneuvers.
 
 ## 6. Evolution: From Numerical to Analytical
+
 While finite-difference derivatives in MJPC validated the concept, they limited the convergence speed. The framework is currently pivoting to **Analytic Differential Dynamic Programming (DDP)** using **Crocoddyl** and **Pinocchio**. By computing analytical derivatives, we target full convergence within a 100 Hz control loop, paving the way for highly dynamic aerial interaction tasks.
 
 <div class="row align-items-start mt-3">

@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: Robotics | Control | Systems 
+subtitle: Robotics | Control | Systems
 profile:
   align: right
   image: QingxinWang.jpg
@@ -11,9 +11,9 @@ profile:
     <p>Undergraduate Student</p>
     <p>Tianjin University</p>
 
-news: false  # includes a list of news items
+news: false # includes a list of news items
 selected_papers: false # disable selected publications on homepage
-social: false  # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 ---
 
 I am a senior undergraduate at **Tianjin University** and a research intern at the **MARS Lab** (Tsinghua University), advised by **Prof. Hang Zhao**.
@@ -24,11 +24,12 @@ Previously, as a core member of the **PeiYang Robotics Team** (RoboMaster), I ar
 
 ### Research Interests
 
-* **Whole-Body MPC:** Formulating optimization problems to explicitly handle coupled dynamics, contact constraints, and actuation limits.
-* **Agile Aerial Manipulation:** Controlling floating-base systems under aerodynamic disturbances and physical interaction.
-* **State Estimation for Control:** Ensuring low-latency, drift-free localization (e.g., via LIO) to support high-bandwidth feedback in aggressive maneuvers.
+- **Whole-Body MPC:** Formulating optimization problems to explicitly handle coupled dynamics, contact constraints, and actuation limits.
+- **Agile Aerial Manipulation:** Controlling floating-base systems under aerodynamic disturbances and physical interaction.
+- **State Estimation for Control:** Ensuring low-latency, drift-free localization (e.g., via LIO) to support high-bandwidth feedback in aggressive maneuvers.
 
 ### Technical Stack
+
 - C/C++, Python, ROS/ROS2, PyTorch, PX4, STM32/Embedded
 
 ### Featured projects
